@@ -13,6 +13,7 @@ import io.ktor.routing.Routing
 
 class Routers {
     fun Application.start() {
+        install(Locations)
         install(CallLogging)
         install(Routing) {
             userController()

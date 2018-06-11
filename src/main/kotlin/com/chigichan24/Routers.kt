@@ -5,6 +5,7 @@ import com.chigichan24.controllers.userController
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.CallLogging
+import io.ktor.locations.Locations
 import io.ktor.routing.Routing
 
 /**
@@ -12,7 +13,7 @@ import io.ktor.routing.Routing
  */
 
 class Routers {
-    fun Application.start() {
+    fun Application.install() {
         install(Locations)
         install(CallLogging)
         install(Routing) {

@@ -16,6 +16,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'kotlin'
 
 repositories {
+    jcenter()
     mavenCentral()
     maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     maven { url "https://dl.bintray.com/kotlin/ktor" }
@@ -23,8 +24,13 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.ktor:ktor-server-core:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
     compile "io.ktor:ktor-locations:$ktor_version"
+}
+
+kotlin {
+    experimental { coroutines 'enable' }
 }
 
 compileKotlin {

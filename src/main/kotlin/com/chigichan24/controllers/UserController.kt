@@ -27,14 +27,19 @@ fun Route.userController() {
         }
     }
 
-    get<Users.Id> { id ->
-        val result = userModel.find(id.id)
+    get<Users.Id> {
+        val result = userModel.find(it.id)
         call.respond("user name = ${result?.name}")
     }
 
-    get<Users.Create> { create ->
-        userModel.create(create.name, create.email, create.age)
+    get<Users.Create> {
+        userModel.create(it.name, it.email, it.age)
         call.respond("created!")
+    }
+
+    get<Users.Id.Edit> {
+        userModel.update(it.id.id, it.name, it.email, it.age)
+        call.respond("updated!")
     }
 
 }
@@ -49,5 +54,8 @@ class Users {
     data class Search(val id: Int, val name: String? = null)
 
     @Location("/{id}")
-    data class Id(val id: Int)
+    data class Id(val id: Int) {
+        @Location("/edit")
+        data class Edit(val id: Id, val name: String? = null, val email: String? = null, val age: Int? = null)
+    }
 }
